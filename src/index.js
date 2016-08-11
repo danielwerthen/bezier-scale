@@ -9,7 +9,7 @@ import create from './redux/create';
 const store = create({
   curves: [
     {
-      value: [0.25, 0.5, 0.75, 1.75],
+      value: [0.25, 0.5, 0.75, 0.75, 0, 0, 1, 1],
     },
   ],
 });

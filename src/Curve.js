@@ -7,13 +7,13 @@ export default class Curve extends BezierComponent {
     const {
       curveColor,
       curveWidth,
-      value
+      value,
     } = this.props;
     const {x, y} = this;
-    const sx = x(0);
-    const sy = y(0);
-    const ex = x(1);
-    const ey = y(1);
+    const sx = x(value[4]);
+    const sy = y(value[5]);
+    const ex = x(value[6]);
+    const ey = y(value[7]);
     const cx1 = x(value[0]);
     const cy1 = y(value[1]);
     const cx2 = x(value[2]);

@@ -5,12 +5,22 @@ export default function dnd(Component) {
     constructor() {
       super();
       this.state = {};
-      this.events = {
-        onMouseDown: this.handleMouseDown.bind(this),
-        onMouseUp: this.handleMouseUp.bind(this),
-        onMouseLeave: this.handleMouseUp.bind(this),
-        onMouseMove: this.handleMouseMove.bind(this),
-      };
+      this.handleMouseDown = this.handleMouseDown.bind(this);
+      this.handleMouseUp = this.handleMouseUp.bind(this);
+      this.handleMouseMove = this.handleMouseMove.bind(this);
+    }
+    componentWillUnmount() {
+      this.setdown();
+    }
+    setup() {
+      window.addEventListener('mouseup', this.handleMouseUp);
+      window.addEventListener('mouseleave', this.handleMouseLeave);
+      window.addEventListener('mousemove', this.handleMouseMove);
+    }
+    setdown() {
+      window.removeEventListener('mouseup', this.handleMouseUp);
+      window.removeEventListener('mouseleave', this.handleMouseLeave);
+      window.removeEventListener('mousemove', this.handleMouseMove);
     }
     handleMouseDown(e) {
       const {
@@ -21,9 +31,13 @@ export default function dnd(Component) {
         x: clientX,
         y: clientY,
       };
+      this.setup();
+      e.preventDefault();
+      e.stopPropagation();
     }
     handleMouseUp(e) {
       this.last = null;
+      this.setdown();
     }
     handleMouseMove(e) {
       if (!this.last) {
@@ -52,7 +66,7 @@ export default function dnd(Component) {
     render() {
       return (<Component
         {...this.props}
-        {...this.events}
+        onMouseDown={this.handleMouseDown}
       />);
     }
   }

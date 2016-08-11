@@ -1,6 +1,7 @@
 import React from 'react';
 import Curve from './Curve';
 import Handle from './Handle';
+import NoteLines from './NoteLines';
 import { connect } from 'react-redux';
 import propSelector from './propSelector';
 import { set } from './redux';
@@ -15,7 +16,6 @@ function Viewport({
   handleProps,
   onMoveHandle,
 }) {
-  console.log(value);
   function x(value) {
     const w = width - padding[1] - padding[3];
     return Math.round(padding[3] + value * w);
@@ -56,10 +56,16 @@ function Viewport({
     xTo: x(1),
     yTo: y(1)
   };
+
   return (<svg
     width={width}
     height={height}
   >
+    <NoteLines
+      {...sharedProps}
+      color={curveColor}
+      stroke={curveWidth}
+    />
     <Curve
       {...sharedProps}
       value={value}
@@ -69,17 +75,37 @@ function Viewport({
     <g>
       <Handle
         {...sharedProps}
-        index={0}
-        xval={value[0]}
-        yval={value[1]}
+        points={[
+          ...value.slice(4,6),
+          ...value.slice(4,6),
+        ]}
+        onMove={onMove(2)}
+        {...handleProps}
+      />
+      <Handle
+        {...sharedProps}
+        points={[
+          ...value.slice(6,8),
+          ...value.slice(6,8),
+        ]}
+        onMove={onMove(3)}
+        {...handleProps}
+      />
+      <Handle
+        {...sharedProps}
+        points={[
+          ...value.slice(0,2),
+          ...value.slice(4,6),
+        ]}
         onMove={onMove(0)}
         {...handleProps}
       />
       <Handle
         {...sharedProps}
-        index={1}
-        xval={value[2]}
-        yval={value[3]}
+        points={[
+          ...value.slice(2,4),
+          ...value.slice(6,8),
+        ]}
         onMove={onMove(1)}
         {...handleProps}
       />
@@ -88,12 +114,12 @@ function Viewport({
 }
 
 Viewport.defaultProps = {
-  value: [0.5, 0.25, 0.75, 0.75],
+  value: [0.5, 0.25, 0.75, 0.75, 0, 0, 1, 1],
   curveColor: "#333",
   curveWidth: 2,
   width: 600,
   height: 600,
-  padding: [100, 100, 100, 100],
+  padding: [10, 10, 10, 100],
   handleProps: {
     radius: 5,
     stroke: 2,

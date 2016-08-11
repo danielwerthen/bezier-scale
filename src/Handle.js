@@ -7,22 +7,20 @@ class Handle extends BezierComponent {
   render() {
     const { x, y } = this;
     const {
-      index,
       radius,
       color,
       stroke,
-      xval,
-      yval,
+      points,
       onMouseDown,
       onMouseUp,
       onMouseLeave,
       onMouseMove,
     } = this.props;
 
-    const sx = x(index);
-    const sy = y(index);
-    const cx = x(xval);
-    const cy = y(yval);
+    const sx = x(points[2]);
+    const sy = y(points[3]);
+    const cx = x(points[0]);
+    const cy = y(points[1]);
     const a = Math.atan2(cy-sy, cx-sx);
     const cxs = cx - radius * Math.cos(a);
     const cys = cy - radius * Math.sin(a);
