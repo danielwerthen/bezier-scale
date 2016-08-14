@@ -15,6 +15,7 @@ function Viewport({
   padding,
   handleProps,
   onMoveHandle,
+  ...rest,
 }) {
   function x(value) {
     const w = width - padding[1] - padding[3];
@@ -63,6 +64,7 @@ function Viewport({
   >
     <NoteLines
       {...sharedProps}
+      {...rest}
       color={curveColor}
       stroke={curveWidth}
     />

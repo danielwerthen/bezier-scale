@@ -8,12 +8,12 @@ function printOctave(octave) {
 }
 
 function NoteOutput({
-  noteLines,
+  notes,
 }) {
-  const notes = noteLines.map(({ note, octave }) =>
-    `${note}${printOctave(octave)}`);
+  const print = notes.map(({ note, octave, length }) =>
+    `${note}${printOctave(octave)} – ${length}`);
   return (<div>
-    <p>{notes.join(' ')}</p>
+    <p>{print.join(' ')}</p>
   </div>);
 }
 

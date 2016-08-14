@@ -12,4 +12,4 @@ export function lineIntersections({
   return _.sortBy(lines, 'intersection');
 }
 
-export default single(lineIntersections, 'noteLines');
+export default single(lineIntersections, 'notes');

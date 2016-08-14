@@ -10,24 +10,12 @@ class NoteLines extends BezierComponent {
     const {
       stroke,
       color,
-      notes,
+      noteLines,
     } = this.props;
-
-    function lines(nr, dir) {
-      const size = 1 / (nr + 1);
-      return _.range(1, nr + 1)
-        .map(idx => ({
-          x1: x(dir ? idx * size : 0),
-          y1: y(!dir ? idx * size : 0),
-          x2: x(dir ? idx * size : 1),
-          y2: y(!dir ? idx * size : 1),
-        }));
-    }
-    const xLines = lines(notes.length, false);
 
     return <g>
     {
-      notes.map((note, idx) => (<text
+      [].map((line, idx) => (<text
         x={x(0) - 24}
         y={y((idx + 1)/ (notes.length + 1)) + 5}
         key={idx}
@@ -38,19 +26,18 @@ class NoteLines extends BezierComponent {
       </text>))
     }
     {
-      xLines.map((pos, idx)=> (<line
+      noteLines.map(({ line }, idx)=> (<line
         key={`x${idx}`}
         stroke={color}
         strokeWidth={stroke}
-        {...pos}
+        x1={x(line.p1.x)}
+        y1={y(line.p1.y)}
+        x2={x(line.p2.x)}
+        y2={y(line.p2.y)}
       />))
     }
     </g>;
   }
 }
-
-NoteLines.defaultProps = {
-  notes: ['A', 'Bb', 'B', 'C', 'Db', 'D', 'Eb', 'E', 'F', 'Gb', 'G'],
-};
 
 export default pure(NoteLines);

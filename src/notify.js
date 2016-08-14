@@ -5,12 +5,16 @@ import propSelector from './propSelector';
 
 import noteLines from './mods/note-lines';
 import bezier from './mods/bezier';
-import lineIntersections from './mods/line-intersections';
+import notes from './mods/notes';
+import mergeNotes from './mods/merge-notes';
+import noteLength from './mods/note-length';
 
 const mods = [
   bezier,
   noteLines,
-  lineIntersections,
+  notes,
+  mergeNotes,
+  noteLength,
 ];
 
 const mapState = propSelector({
