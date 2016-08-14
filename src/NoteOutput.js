@@ -1,19 +1,12 @@
 import React from 'react';
-
-function printOctave(octave) {
-  if (!octave) {
-    return '';
-  }
-  return `${octave > 0 ? '+' : '-'}${octave}`
-}
+import Note from './Note';
 
 function NoteOutput({
   notes,
 }) {
-  const print = notes.map(({ note, octave, length }) =>
-    `${note}${printOctave(octave)} – ${length}`);
+  const print = notes.map(Note);
   return (<div>
-    <p>{print.join(' ')}</p>
+    <p>{print}</p>
   </div>);
 }
 

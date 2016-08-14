@@ -1,7 +1,8 @@
-import _ from 'lodash';
 import React from 'react';
+import ReactDOM from 'react';
 import BezierComponent from './BezierComponent';
 import pure from './pure';
+import { noteToString } from './Note';
 
 class NoteLines extends BezierComponent {
 
@@ -15,14 +16,14 @@ class NoteLines extends BezierComponent {
 
     return <g>
     {
-      [].map((line, idx) => (<text
-        x={x(0) - 24}
-        y={y((idx + 1)/ (notes.length + 1)) + 5}
+      noteLines.map(({ line, note, octave }, idx) => (<text
+        x={x(0) - 48}
+        y={y(line.p1.y) + 5}
         key={idx}
         fontFamily="monospace"
         fontSize="14"
       >
-        {note}
+        {noteToString(note, octave)}
       </text>))
     }
     {

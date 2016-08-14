@@ -2,9 +2,6 @@ import React from 'react';
 import Curve from './Curve';
 import Handle from './Handle';
 import NoteLines from './NoteLines';
-import { connect } from 'react-redux';
-import propSelector from './propSelector';
-import { set } from './redux';
 
 function Viewport({
   value,
@@ -132,19 +129,4 @@ Viewport.defaultProps = {
   },
 };
 
-const mapState = propSelector({
-  value: 'curves[0].value',
-});
-
-function mapDispatch(dispatch) {
-  return {
-    onMoveHandle(index, x, y) {
-      dispatch(set({
-        [`curves[0].value[${index * 2}]`]: x,
-        [`curves[0].value[${index * 2 + 1}]`]: y,
-      }));
-    },
-  };
-}
-
-export default connect(mapState, mapDispatch)(Viewport);
+export default Viewport;

@@ -2,7 +2,7 @@ import _ from 'lodash';
 import { single } from './_base';
 
 export function lines({
-  lineCount = 10,
+  lineCount,
 }) {
   const size = 1 / (lineCount + 1);
   return _.range(1, lineCount + 1)
