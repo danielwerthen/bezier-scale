@@ -117,7 +117,7 @@ Viewport.defaultProps = {
   value: [0.5, 0.25, 0.75, 0.75, 0, 0, 1, 1],
   curveColor: "#333",
   curveWidth: 2,
-  width: 600,
+  width: 900,
   height: 600,
   padding: [10, 10, 10, 100],
   handleProps: {

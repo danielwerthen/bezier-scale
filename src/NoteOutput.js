@@ -1,21 +1,20 @@
 import React from 'react';
-import { connect } from 'react-redux';
-import propSelector from './propSelector';
-import { set } from './redux';
-import bezierEasing from 'bezier-easing';
+
+function printOctave(octave) {
+  if (!octave) {
+    return '';
+  }
+  return `${octave > 0 ? '+' : '-'}${octave}`
+}
 
 function NoteOutput({
-  value,
+  noteLines,
 }) {
-  console.log(value);
-  const easing = bezierEasing.apply(null, value);
+  const notes = noteLines.map(({ note, octave }) =>
+    `${note}${printOctave(octave)}`);
   return (<div>
-    {_.range(0, 10).map(i => <div>{easing(i / 10)}</div>)}
+    <p>{notes.join(' ')}</p>
   </div>);
 }
 
-const mapState = propSelector({
-  value: 'curves[0].value',
-});
-
-export default connect(mapState)(NoteOutput);
+export default NoteOutput;
