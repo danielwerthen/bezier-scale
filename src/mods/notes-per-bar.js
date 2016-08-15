@@ -6,4 +6,4 @@ export function notesPerBar({
 }) {
   return beatsPerBar * (1 / lowestNoteValue);
 }
-export default single(notesPerBar);
+export default single(notesPerBar, 'notesPerBar');

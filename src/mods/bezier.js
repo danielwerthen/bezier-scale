@@ -16,4 +16,4 @@ export function bezier({
   return new Bezier(rearrange(value));
 }
 
-export default single(bezier);
+export default single(bezier, 'bezier');

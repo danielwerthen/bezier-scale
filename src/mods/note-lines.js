@@ -29,4 +29,4 @@ export function noteLines(props) {
   }));
 }
 
-export default single(noteLines);
+export default single(noteLines, 'noteLines');
