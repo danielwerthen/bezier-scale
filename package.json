@@ -2,6 +2,7 @@
   "name": "bezier",
   "version": "0.0.1",
   "private": true,
+  "homepage": "http://danielwerthen.github.io/bezier-scale",
   "devDependencies": {
     "react-scripts": "0.2.0"
   },
