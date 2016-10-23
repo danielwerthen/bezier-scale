@@ -11,7 +11,7 @@ const handleSelector = (idx) => createSelector(
   ]
 );
 
-const mapState = () => {
+export function selectCurve() {
   return createSelector(
     state => state.points.anchor0,
     state => state.points.anchor1,
@@ -21,6 +21,6 @@ const mapState = () => {
       value: [...h0, ...h1, ...a0, ...a1],
     })
   );
-};
+}
 
-export default connect(mapState);
+export default connect(selectCurve);

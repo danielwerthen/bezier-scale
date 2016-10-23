@@ -1,33 +1,35 @@
 import React from 'react';
-import BezierComponent from '../BezierComponent';
-import { noteToString } from '../Note';
+import BezierComponent from './BezierComponent';
 
-export default class NoteLines extends BezierComponent {
+export default class GridLines extends BezierComponent {
 
   render() {
     const { x, y } = this;
     const {
       stroke,
       color,
-      noteLines,
+      lines,
+      lineOptions,
+      labelOffset = [-48, 5],
     } = this.props;
     return <g>
     {
-      noteLines.map(({ line, note, octave }, idx) => (<text
-        x={x(0) - 48}
-        y={y(line.p1.y) + 5}
+      lines.map(({ line, label }, idx) => (<text
+        x={x(line.p1.x) + labelOffset[0]}
+        y={y(line.p1.y) + labelOffset[1]}
         key={idx}
         fontFamily="monospace"
         fontSize="14"
       >
-        {noteToString(note, octave)}
+        {label}
       </text>))
     }
     {
-      noteLines.map(({ line }, idx)=> (<line
+      lines.map(({ line }, idx)=> (<line
         key={`x${idx}`}
         stroke={color}
         strokeWidth={stroke}
+        {...lineOptions}
         x1={x(line.p1.x)}
         y1={y(line.p1.y)}
         x2={x(line.p2.x)}
@@ -38,7 +40,7 @@ export default class NoteLines extends BezierComponent {
   }
 }
 
-NoteLines.defaultProps = {
+GridLines.defaultProps = {
   color: '#555',
   stroke: 1,
 };

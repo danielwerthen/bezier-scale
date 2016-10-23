@@ -22,12 +22,12 @@ const store = create({
     handle1Offset: [0.8,0.7],
   },
   settings: {
-    curveCount: 3,
+    curveCount: 1,
     notes: ['A', 'Bb', 'B', 'C', 'Db', 'D', 'Eb', 'E', 'F', 'Gb', 'G'],
     beatsPerBar: 4,
     lowestNoteValue: 0.25,
     bars: 4,
-    lineCount: 15,
+    lineCount: 10,
   },
 });
 

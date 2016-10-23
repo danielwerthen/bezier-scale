@@ -1,38 +1,37 @@
 import _ from 'lodash';
 import { createSelector } from 'reselect';
 import { connect } from 'react-redux';
-import { noteToString } from '../Note';
 
 function lines(lineCount) {
   const size = 1 / (lineCount + 1);
   return _.range(1, lineCount + 1)
     .map(idx => ({
       p1: {
-        x: 0,
-        y: idx * size,
+        x: idx * size,
+        y: 0,
       },
       p2: {
-        x: 1,
-        y: idx * size,
+        x: idx * size,
+        y: 1,
       },
     }));
 }
 
-function gridLines(notes, lineCount) {
-  return lines(lineCount).map((line, idx) => ({
+function gridLines(bars) {
+  return lines(bars).map((line, idx) => ({
     line,
-    label: noteToString(
-      notes[idx % notes.length],
-      Math.floor(idx / notes.length)
-    ),
+    label: idx + 1,
   }));
 }
 
 const mapState = () => createSelector(
-  state => state.settings.notes,
-  state => state.settings.lineCount,
+  state => state.settings.bars,
   (...args) => ({
     lines: gridLines(...args),
+    labelOffset: [-5, 24],
+    lineOptions: {
+      strokeDasharray: 10,
+    },
   })
 );
 

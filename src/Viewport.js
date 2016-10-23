@@ -60,7 +60,7 @@ Viewport.defaultProps = {
   curveWidth: 2,
   width: 900,
   height: 600,
-  padding: [20, 20, 20, 100],
+  padding: [20, 20, 100, 100],
   handleProps: {
     radius: 5,
     stroke: 2,

@@ -4,10 +4,11 @@ import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import CurveControl from './CurveControl';
 import Viewport from './components/viewport';
 import Curves from './components/curves';
-import NoteOutput from './NoteOutput';
 import ConfigBase from './Config';
 import connectConfig from './connect-config';
 import NoteLines from './note-lines';
+import BarLines from './bar-lines';
+import NoteOutput from './note-output';
 
 const Config = connectConfig(ConfigBase);
 
@@ -20,6 +21,7 @@ const controlsFrameStyle = {
 
 function Controls() {
   return (<div style={controlsFrameStyle}>
+    <NoteOutput />
     <Config />
   </div>);
 }
@@ -30,6 +32,7 @@ class App extends Component {
       <MuiThemeProvider>
         <div className="App">
           <Viewport>
+            <BarLines />
             <NoteLines />
             <Curves />
             <CurveControl />
