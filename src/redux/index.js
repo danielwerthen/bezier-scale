@@ -4,3 +4,11 @@ export function set(changes) {
     changes,
   };
 }
+
+export function updatePoint(name, value) {
+  return {
+    sym: updatePoint,
+    name,
+    value,
+  };
+}

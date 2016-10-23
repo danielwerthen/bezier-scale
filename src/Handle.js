@@ -10,17 +10,18 @@ class Handle extends BezierComponent {
       radius,
       color,
       stroke,
-      points,
+      center,
+      anchor,
       onMouseDown,
       onMouseUp,
       onMouseLeave,
       onMouseMove,
     } = this.props;
 
-    const sx = x(points[2]);
-    const sy = y(points[3]);
-    const cx = x(points[0]);
-    const cy = y(points[1]);
+    const sx = x(anchor[0]);
+    const sy = y(anchor[1]);
+    const cx = x(center[0]);
+    const cy = y(center[1]);
     const a = Math.atan2(cy-sy, cx-sx);
     const cxs = cx - radius * Math.cos(a);
     const cys = cy - radius * Math.sin(a);
@@ -49,5 +50,11 @@ class Handle extends BezierComponent {
     </g>;
   }
 }
+
+Handle.defaultProps = {
+  radius: 5,
+  stroke: 2,
+  color: '#f00',
+};
 
 export default dnd(Handle);

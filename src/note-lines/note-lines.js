@@ -1,10 +1,8 @@
 import React from 'react';
-import ReactDOM from 'react';
-import BezierComponent from './BezierComponent';
-import pure from './pure';
-import { noteToString } from './Note';
+import BezierComponent from '../BezierComponent';
+import { noteToString } from '../Note';
 
-class NoteLines extends BezierComponent {
+export default class NoteLines extends BezierComponent {
 
   render() {
     const { x, y } = this;
@@ -13,7 +11,6 @@ class NoteLines extends BezierComponent {
       color,
       noteLines,
     } = this.props;
-
     return <g>
     {
       noteLines.map(({ line, note, octave }, idx) => (<text
@@ -41,4 +38,7 @@ class NoteLines extends BezierComponent {
   }
 }
 
-export default pure(NoteLines);
+NoteLines.defaultProps = {
+  color: '#555',
+  stroke: 1,
+};

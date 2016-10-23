@@ -27,3 +27,8 @@ export default class Curve extends BezierComponent {
       d={curve} />;
   }
 }
+
+Curve.defaultProps = {
+  curveColor: '#333',
+  curveWidth: 2,
+};

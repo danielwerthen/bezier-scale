@@ -4,6 +4,7 @@
   "private": true,
   "homepage": "http://danielwerthen.github.io/bezier-scale",
   "devDependencies": {
+    "react-addons-perf": "^15.3.0",
     "react-scripts": "0.2.0"
   },
   "dependencies": {
@@ -15,7 +16,8 @@
     "react-addons-shallow-compare": "^15.3.0",
     "react-compose": "^1.7.0",
     "react-dom": "^15.3.0",
-    "react-tap-event-plugin": "^1.0.0"
+    "react-tap-event-plugin": "^1.0.0",
+    "reselect": "^2.5.4"
   },
   "scripts": {
     "start": "react-scripts start",

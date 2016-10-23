@@ -14,14 +14,29 @@ import { compose, styles } from 'react-compose';
 
 const Fieldset = compose(styles({ border: 0 }))('fieldset');
 
-function ConfigBase({
-  beatsPerBar,
-  bars,
-  lowestNoteValue,
-  lineCount,
+export default function Config({
+  settings: {
+    curveCount,
+    beatsPerBar,
+    bars,
+    lowestNoteValue,
+    lineCount,
+    notes,
+  },
   onChangePath,
 }) {
   return (<form style={formStyle}>
+    <Fieldset>
+      <TextField
+        defaultValue={curveCount}
+        floatingLabelText="Curve count"
+        onChange={onChangePath('curveCount',
+            v => parseInt(v, 10),
+            isNumber,
+            v => v <= 10,
+            v => v > 0)}
+      />
+    </Fieldset>
     <Fieldset>
       <TextField
         defaultValue={beatsPerBar}
@@ -50,19 +65,12 @@ function ConfigBase({
         onChange={onChangePath('lineCount', v => parseInt(v, 10), isNumber)}
       />
     </Fieldset>
+    <Fieldset>
+      <TextField
+        defaultValue={notes}
+        floatingLabelText="Notes, (A,B,C...)"
+        onChange={onChangePath('notes', v => v.split(','))}
+      />
+    </Fieldset>
   </form>);
 }
-
-ConfigBase.propTypes = {
-  beatsPerBar: React.PropTypes.number,
-  bars: React.PropTypes.number,
-  lowestNoteValue: React.PropTypes.number,
-  lineCount: React.PropTypes.number,
-  onChangePath: React.PropTypes.func,
-};
-
-const Config = pure(ConfigBase);
-
-export default function Cleanup(props) {
-  return <Config {..._.pick(props, Object.keys(ConfigBase.propTypes))} />;
-};
