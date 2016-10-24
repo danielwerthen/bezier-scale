@@ -21,12 +21,12 @@ function selectBezier() {
   );
 }
 
-function selectPoints() {
+export function selectPoints() {
   return createSelector(
     selectBezier(),
-    state => state.settings.bars,
-    (bezier, bars) => ({
-      points: bezier.getLUT(bars + 1),
+    state => state.settings.noteCount,
+    (bezier, noteCount) => ({
+      points: bezier.getLUT(noteCount + 1),
     })
   );
 }

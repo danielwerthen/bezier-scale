@@ -1,39 +1,91 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { createSelector } from 'reselect';
-import { selectCurve } from '../connect-curve';
-import Bezier from 'bezier-js';
+import { selectPoints } from '../connect-points';
+import { noteToString } from '../Note';
+import offsetize from '../offsetize';
 
-function rearrange(arr) {
-  return [
-    ...arr.slice(4, 6),
-    ...arr.slice(0, 2),
-    ...arr.slice(2, 4),
-    ...arr.slice(6, 8),
-  ];
-}
-
-function selectBezier() {
-  return createSelector(
-    selectCurve(),
-    ({ value }) =>
-      new Bezier(rearrange(value)),
+function notify(p, notes, lineCount, bars) {
+  const {
+    x,
+    y,
+  } = p;
+  const noteIndex = Math.round(y * lineCount);
+  const note = noteToString(
+    notes[noteIndex % notes.length],
+    Math.floor(noteIndex / notes.length)
   );
+  const bar = Math.floor(x * bars);
+  return {
+    note,
+    bar,
+  };
 }
 
-function selectNoteOutput() {
+function selectNotes() {
   return createSelector(
-    selectBezier(),
-    state => state.settings.bars,
-    (bezier, bars) => ({
-      bezier,
+    selectPoints(),
+    state => state.settings.bars + 1,
+    state => state.settings.notes,
+    state => state.settings.lineCount,
+    ({ points }, bars, ...args) => ({
+      notes: points.slice(0, points.length - 1).map(p => notify(p, ...args, bars)),
       bars,
-    })
+    }),
   );
 }
 
-function NoteOutput({ bezier, bars }) {
-  return <pre>{JSON.stringify(bezier.getLUT(bars + 1), null, '  ')}</pre>;
+function NoteOutput({ notes, bars }) {
+  const holder = Array(bars).fill();
+  notes.forEach(({ note, bar }) => {
+    holder[bar] = holder[bar] || [];
+    holder[bar].push(note);
+  });
+  const preStyle = {
+    flex: '1',
+    padding: '0.5em',
+    boxSizing: 'border-box',
+    textAlign: 'left',
+    borderRight: '1px dashed',
+    minHeight: '34px',
+    verticalAlign: 'top',
+  };
+  const containerStyle = {
+    display: 'flex',
+    flexWrap: 'wrap',
+  };
+  const itemStyle = {
+    flex: '1',
+  };
+  function noteItemize(note) {
+    return React.createElement('div',
+      {
+        style: itemStyle,
+      },
+      note);
+  }
+  function combine(ns) {
+    if (!ns) {
+      return null;
+    }
+    return React.createElement('div',
+      {
+        style: containerStyle,
+      },
+      ...ns.map(noteItemize));
+  }
+  const fn = holder
+    .map(combine)
+    .map(ns => (<div style={preStyle}>{ns}</div>));
+  return React.createElement('div',
+    {
+      style: {
+        width: 'calc(100% - 120px)',
+        margin: '0 20px 0 100px',
+        display: 'flex',
+      },
+    },
+    fn);
 }
 
-export default connect(selectNoteOutput)(NoteOutput);
+export default offsetize(connect(selectNotes)(NoteOutput), 'div');

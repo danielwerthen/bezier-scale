@@ -4,8 +4,8 @@ import { connect } from 'react-redux';
 import { noteToString } from '../Note';
 
 function lines(lineCount) {
-  const size = 1 / (lineCount + 1);
-  return _.range(1, lineCount + 1)
+  const size = 1 / (lineCount);
+  return _.range(0, lineCount)
     .map(idx => ({
       p1: {
         x: 0,

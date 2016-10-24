@@ -27,6 +27,7 @@ const store = create({
     beatsPerBar: 4,
     lowestNoteValue: 0.25,
     bars: 4,
+    noteCount: 5,
     lineCount: 10,
   },
 });

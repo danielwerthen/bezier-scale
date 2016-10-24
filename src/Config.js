@@ -21,6 +21,7 @@ export default function Config({
     bars,
     lowestNoteValue,
     lineCount,
+    noteCount,
     notes,
   },
   onChangePath,
@@ -33,15 +34,8 @@ export default function Config({
         onChange={onChangePath('curveCount',
             v => parseInt(v, 10),
             isNumber,
-            v => v <= 10,
+            v => v <= 50,
             v => v > 0)}
-      />
-    </Fieldset>
-    <Fieldset>
-      <TextField
-        defaultValue={beatsPerBar}
-        floatingLabelText="Beats per bar"
-        onChange={onChangePath('beatsPerBar', v => parseInt(v, 10), isNumber)}
       />
     </Fieldset>
     <Fieldset>
@@ -53,9 +47,9 @@ export default function Config({
     </Fieldset>
     <Fieldset>
       <TextField
-        defaultValue={lowestNoteValue}
-        floatingLabelText="Lowest note value"
-        onChange={onChangePath('lowestNoteValue', v => parseInt(v, 10), isNumber)}
+        defaultValue={noteCount}
+        floatingLabelText="Note count"
+        onChange={onChangePath('noteCount', v => parseInt(v, 10), isNumber)}
       />
     </Fieldset>
     <Fieldset>
