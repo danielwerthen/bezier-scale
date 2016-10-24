@@ -30,5 +30,5 @@ export default class Curve extends BezierComponent {
 
 Curve.defaultProps = {
   curveColor: '#333',
-  curveWidth: 2,
+  curveWidth: 1,
 };
