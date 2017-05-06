@@ -2,27 +2,31 @@ import React, { Component } from 'react';
 import './App.css';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import CurveControl from './CurveControl';
+import SlideAdjusted from './components/slide-adjusted';
 import Viewport from './components/viewport';
 import Curves from './components/curves';
+import Drawer from './components/drawer';
 import ConfigBase from './Config';
 import connectConfig from './connect-config';
 import NoteLines from './note-lines';
 import BarLines from './bar-lines';
 import NoteOutput from './note-output';
+import autoSize from './auto-size';
 
 const Config = connectConfig(ConfigBase);
 
 const controlsFrameStyle = {
   position: 'absolute',
   width: '100%',
-  top: '100%',
   left: 0,
 };
 
 function Controls() {
   return (<div style={controlsFrameStyle}>
     <NoteOutput />
-    <Config />
+    <Drawer>
+      <Config />
+    </Drawer>
   </div>);
 }
 
@@ -31,12 +35,12 @@ class App extends Component {
     return (
       <MuiThemeProvider>
         <div className="App">
-          <Viewport>
+          <SlideAdjusted {...this.props}>
             <BarLines />
             <NoteLines />
             <Curves />
             <CurveControl />
-          </Viewport>
+          </SlideAdjusted>
           <Controls />
         </div>
       </MuiThemeProvider>
@@ -44,4 +48,4 @@ class App extends Component {
   }
 }
 
-export default App;
+export default autoSize(App);

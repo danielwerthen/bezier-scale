@@ -2,9 +2,9 @@ import _ from 'lodash';
 import { createSelector } from 'reselect';
 import { connect } from 'react-redux';
 
-function lines(lineCount) {
-  const size = 1 / (lineCount + 1);
-  return _.range(1, lineCount + 1)
+function lines(barCount) {
+  const size = 1 / (barCount);
+  return _.range(0, barCount)
     .map(idx => ({
       p1: {
         x: idx * size,

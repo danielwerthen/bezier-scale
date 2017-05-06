@@ -10,7 +10,7 @@ function notify(p, notes, lineCount, bars) {
     x,
     y,
   } = p;
-  const noteIndex = Math.round(y * lineCount);
+  const noteIndex = Math.floor(y * lineCount);
   const note = noteToString(
     notes[noteIndex % notes.length],
     Math.floor(noteIndex / notes.length)
@@ -18,18 +18,18 @@ function notify(p, notes, lineCount, bars) {
   const bar = Math.floor(x * bars);
   return {
     note,
-    bar,
+    bar: bar === bars ? bar - 1 : bar,
   };
 }
 
 function selectNotes() {
   return createSelector(
     selectPoints(),
-    state => state.settings.bars + 1,
+    state => state.settings.bars,
     state => state.settings.notes,
     state => state.settings.lineCount,
     ({ points }, bars, ...args) => ({
-      notes: points.slice(0, points.length - 1).map(p => notify(p, ...args, bars)),
+      notes: points.map(p => notify(p, ...args, bars)),
       bars,
     }),
   );
@@ -47,7 +47,8 @@ function NoteOutput({ notes, bars }) {
     boxSizing: 'border-box',
     textAlign: 'left',
     borderRight: '1px dashed',
-    minHeight: '34px',
+    minHeight: '2em',
+    fontSize: '10px',
     verticalAlign: 'top',
   };
   const containerStyle = {
