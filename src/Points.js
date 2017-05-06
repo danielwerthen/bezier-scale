@@ -7,7 +7,6 @@ export default class Points extends BezierComponent {
     const {
       radius,
       color,
-      points,
     } = this.props;
     return (<circle
       cx={this.x(x)}

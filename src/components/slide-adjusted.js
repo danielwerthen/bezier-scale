@@ -33,8 +33,8 @@ export default class SlideAdjusted extends React.Component {
   render() {
     const {
       children,
-      height,
-      width,
+      height = 0,
+      width = 0,
     } = this.props;
     return (<div>
       <Viewport height={height * this.state.value} width={width}>

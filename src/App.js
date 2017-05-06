@@ -3,7 +3,6 @@ import './App.css';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import CurveControl from './CurveControl';
 import SlideAdjusted from './components/slide-adjusted';
-import Viewport from './components/viewport';
 import Curves from './components/curves';
 import Drawer from './components/drawer';
 import ConfigBase from './Config';

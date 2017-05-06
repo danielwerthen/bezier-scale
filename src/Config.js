@@ -1,6 +1,5 @@
 import React from 'react';
 import TextField from 'material-ui/TextField';
-import pure from './pure';
 
 const formStyle = {
   margin: '2em',

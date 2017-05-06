@@ -10,7 +10,10 @@ function notify(p, notes, lineCount, bars) {
     x,
     y,
   } = p;
-  const noteIndex = Math.floor(y * lineCount);
+  let noteIndex = Math.floor(y * lineCount);
+  if (noteIndex < 0) {
+    noteIndex = notes.length + noteIndex;
+  }
   const note = noteToString(
     notes[noteIndex % notes.length],
     Math.floor(noteIndex / notes.length)
@@ -77,7 +80,7 @@ function NoteOutput({ notes, bars }) {
   }
   const fn = holder
     .map(combine)
-    .map(ns => (<div style={preStyle}>{ns}</div>));
+    .map((ns, idx) => (<div style={preStyle} key={idx}>{ns}</div>));
   return React.createElement('div',
     {
       style: {

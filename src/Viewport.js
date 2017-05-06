@@ -1,6 +1,4 @@
 import React from 'react';
-import Curve from './Curve';
-import Handle from './Handle';
 
 function Viewport({
   children,
