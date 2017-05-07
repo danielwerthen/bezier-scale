@@ -59,7 +59,7 @@ function NoteOutput({ notes, bars }) {
     flexWrap: 'wrap',
   };
   const itemStyle = {
-    flex: '1',
+    flex: '1 0 auto',
   };
   function noteItemize(note) {
     return React.createElement('div',
